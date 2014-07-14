@@ -44,23 +44,23 @@ http://notepad-plus-plus.org/features/function-list.html
 		<parsers>
 
 			<parser id="nasal_function" displayName="Nasal" commentExpr="(#.*?$)">
-				<classRange	mainExpr="^[\s]*([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*[\s]*\=[\s]*\{?[\s]*([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*[\s]*\:[\s]*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+				<classRange mainExpr="\s*([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*\=\s*\{?\s*([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*\:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
 					<className>
 						<nameExpr expr="([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*" />
 					</className>
-					<function mainExpr="(?:[_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*[\s]*\:[\s]*func\b">
+					<function mainExpr="(?:[_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*\:\s*func\b">
 						<functionName>
 							<funcNameExpr expr="(?:[_A-Za-z][\w_]*\.)*\K[_A-Za-z][\w_]*" />
 						</functionName>
 					</function>
 				</classRange>
-				<function mainExpr="^[\s]*(var[\s]+)?([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*[\s]*\=[\s]*func\b" displayMode="$className->$functionName">
+				<function mainExpr="\s*(var\s+)?([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*\=\s*func\b" displayMode="$className->$functionName">
 					<className>
 						<nameExpr expr="([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\." />
 						<nameExpr expr="([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*" />
 					</className>
 					<functionName>
-						<nameExpr expr="(?:var[\s]+)?(?:[_A-Za-z][\w_]*\.)*\K[_A-Za-z][\w_]*" />
+						<nameExpr expr="(?:var\s+)?(?:[_A-Za-z][\w_]*\.)*\K[_A-Za-z][\w_]*" />
 					</functionName>
 				</function>
 			</parser>
