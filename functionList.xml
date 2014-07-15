@@ -46,9 +46,19 @@ http://notepad-plus-plus.org/features/function-list.html
 			<parser id="nasal_function" displayName="Nasal" commentExpr="(#.*?$)">
                 <!--
                     TODO: Fix problems caused by code like MapStructure.nas:806
-                        ([^},]*?[},])*? cleans up classRange matching, but breaks outer function matching
+                        ([^},]*?[},])*? cleans up classRange matching, but breaks outer function matching following statements like x={} inside classes
+                            - Also breaks detection of functions nested inside class members, but these were only being detected because surrounding classes were left unmatched
+                            - Issues faced in MapStructure.nas:
+                                67:     var temp = {}; hijacks 93:CachedElement, hides r()
+                                261:    var h={}; hides 264:member(), 275:_in(), 276:members()
+                                292:    var others = {}; in conjunction with 261:var h={}; hides 310:call_draw(), 315:style_string()
+                                940:    NavaidSymbolLayer hijacks 960:SingleSymbolLayer
+                                372:    fn() possibly hidden due to nesting within class member function
+                                872:    updater() nested, hidden
+                                990:    updater() nested, hidden
+                        - Fix assumes that classes cannot be declared without curly braces
                 -->
-				<classRange mainExpr="\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{?([^,}]*?,)*?\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+				<classRange mainExpr="\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{([^},]*?[},])*?\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
 					<className>
 						<nameExpr expr="(var\s+)?\K([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
 					</className>
