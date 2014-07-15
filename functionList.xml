@@ -44,14 +44,17 @@ http://notepad-plus-plus.org/features/function-list.html
 		<parsers>
 
 			<parser id="nasal_function" displayName="Nasal" commentExpr="(#.*?$)">
-                <!-- TODO: Fix problems caused by code like MapStructure.nas:806 -->
-				<classRange mainExpr="\s*(var\s+)?([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*=\s*\{?([^,}]*?,)*?\s*(var\s+)?([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+                <!--
+                    TODO: Fix problems caused by code like MapStructure.nas:806
+                        ([^},]*?[},])*? cleans up classRange matching, but breaks outer function matching
+                -->
+				<classRange mainExpr="\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{?([^,}]*?,)*?\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
 					<className>
-						<nameExpr expr="(var\s+)?\K([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*" />
+						<nameExpr expr="(var\s+)?\K([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
 					</className>
-					<function mainExpr="([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*:\s*func\b">
+					<function mainExpr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b">
 						<functionName>
-							<funcNameExpr expr="([_A-Za-z][\w_]*\.)*\K[_A-Za-z][\w_]*" />
+							<funcNameExpr expr="([_A-Za-z]\w*\.)*\K[_A-Za-z]\w*" />
 						</functionName>
 					</function>
 				</classRange>
@@ -63,12 +66,12 @@ http://notepad-plus-plus.org/features/function-list.html
                             3. (?<!^\s*\#)
                             4. (?<=^\s*[^\#]*)
                 -->
-				<function mainExpr="\s*(var\s+)?([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*\s*=\s*func\b" displayMode="$className->$functionName">
+				<function mainExpr="\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*func\b" displayMode="$className->$functionName">
 					<className>
-						<nameExpr expr="([_A-Za-z][\w_]*\.)*[_A-Za-z][\w_]*(?=\.)" />
+						<nameExpr expr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*(?=\.)" />
 					</className>
 					<functionName>
-						<nameExpr expr="(var\s+)?([_A-Za-z][\w_]*\.)*\K[_A-Za-z][\w_]*" />
+						<nameExpr expr="(var\s+)?([_A-Za-z]\w*\.)*\K[_A-Za-z]\w*" />
 					</functionName>
 				</function>
 			</parser>
