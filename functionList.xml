@@ -58,7 +58,7 @@ http://notepad-plus-plus.org/features/function-list.html
                                 990:    updater() nested, hidden
                         - Fix assumes that classes cannot be declared without curly braces
                 -->
-				<classRange mainExpr="\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{([^},]*?[},])*?\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+				<classRange mainExpr="[\t ]*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{([^\},]*?,)*?\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
 					<className>
 						<nameExpr expr="(var\s+)?\K([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
 					</className>
@@ -76,7 +76,7 @@ http://notepad-plus-plus.org/features/function-list.html
                             3. (?<!^\s*\#)
                             4. (?<=^\s*[^\#]*)
                 -->
-				<function mainExpr="\s*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*func\b" displayMode="$className->$functionName">
+				<function mainExpr="[\t ]*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*func\b" displayMode="$className->$functionName">
 					<className>
 						<nameExpr expr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*(?=\.)" />
 					</className>
