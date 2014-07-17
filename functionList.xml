@@ -44,21 +44,14 @@ http://notepad-plus-plus.org/features/function-list.html
 		<parsers>
 
 			<parser id="nasal_function" displayName="Nasal" commentExpr="(#.*?$)">
-                <!--
-                    TODO:
-                        MapStructure.nas:
-                            372:    fn() possibly hidden due to nesting within class member function
-                            872:    updater() nested, hidden
-                            990:    updater() nested, hidden
-                    Regex assumes that classes cannot be declared without curly braces.
-                -->
+                <!-- Regex assumes that classes cannot be declared without curly braces -->
 				<classRange mainExpr="^[^\#\r\n]*?[\t ]*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
 					<className>
 						<nameExpr expr="(var\s+)?\K([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
 					</className>
-					<function mainExpr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b">
+					<function mainExpr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*[:=]\s*func\b">
 						<functionName>
-							<funcNameExpr expr="([_A-Za-z]\w*\.)*\K[_A-Za-z]\w*" />
+							<funcNameExpr expr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
 						</functionName>
 					</function>
 				</classRange>
