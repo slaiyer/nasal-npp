@@ -52,7 +52,7 @@ http://notepad-plus-plus.org/features/function-list.html
                             990:    updater() nested, hidden
                     Regex assumes that classes cannot be declared without curly braces.
                 -->
-				<classRange mainExpr="^[^\#\r\n]*?[\t ]*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*:\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+				<classRange mainExpr="^[^\#\r\n]*?[\t ]*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
 					<className>
 						<nameExpr expr="(var\s+)?\K([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
 					</className>
