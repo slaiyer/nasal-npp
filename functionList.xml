@@ -45,13 +45,14 @@ http://notepad-plus-plus.org/features/function-list.html
 
             <parser id="nasal_function" displayName="Nasal" commentExpr="(#.*?$)">
                 <!--
+                    Parser is based on syntax observed in parts of $FG_ROOT/Nasal/ and http://plausible.org/nasal/sample.nas
                     Regex assumes that classes cannot be declared without curly braces.
                     Anonymous functions not matched/listed yet.
 
                     For testing purposes:
                         Correctness:    $FG_ROOT/Nasal/canvas/MapStructure.nas seems to have the most convoluted code.
                         Time:           $FG_ROOT/Nasal/local_weather.nas seems to take the longest for parsing.
-                        Size:           $FG_ROOT/Nasal/bombable.nas seems to be the most largest file yet.
+                        Size:           $FG_ROOT/Nasal/bombable.nas seems to be the largest file yet.
                 -->
                 <classRange mainExpr="^(?>[^\#\r\n]*?)(var\s+)?(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
                     <className>
