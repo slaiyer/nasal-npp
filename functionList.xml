@@ -44,23 +44,31 @@ http://notepad-plus-plus.org/features/function-list.html
         <parsers>
 
             <parser id="nasal_function" displayName="Nasal" commentExpr="(#.*?$)">
-                <!-- Regex assumes that classes cannot be declared without curly braces -->
-                <classRange mainExpr="^[^\#\r\n]*?[\t ]*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+                <!--
+                    Regex assumes that classes cannot be declared without curly braces.
+                    Anonymous functions not matched/listed yet.
+
+                    For testing purposes:
+                        Correctness:    $FG_ROOT/Nasal/canvas/MapStructure.nas seems to have the most convoluted code.
+                        Time:           $FG_ROOT/Nasal/local_weather.nas seems to take the longest for parsing.
+                        Size:           $FG_ROOT/Nasal/bombable.nas seems to be the most largest file yet.
+                -->
+                <classRange mainExpr="^(?>[^\#\r\n]*?)(var\s+)?(?>[_A-Za-z]\w*\.)*?[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
                     <className>
-                        <nameExpr expr="(var\s+)?\K([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
+                        <nameExpr expr="(var\s+)?\K(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
                     </className>
-                    <function mainExpr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*[:=]\s*func\b">
+                    <function mainExpr="(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*[:=]\s*func\b">
                         <functionName>
-                            <funcNameExpr expr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
+                            <funcNameExpr expr="(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)" />
                         </functionName>
                     </function>
                 </classRange>
-                <function mainExpr="^[^\#\r\n]*?[\t ]*(var\s+)?([_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*func\b" displayMode="$className->$functionName">
+                <function mainExpr="^[^\#\r\n]*?(var\s+)?(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*=\s*func\b" displayMode="$className->$functionName">
                     <className>
-                        <nameExpr expr="([_A-Za-z]\w*\.)*[_A-Za-z]\w*(?=\.)" />
+                        <nameExpr expr="(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*(?=\.)" />
                     </className>
                     <functionName>
-                        <nameExpr expr="(var\s+)?([_A-Za-z]\w*\.)*\K[_A-Za-z]\w*" />
+                        <nameExpr expr="(var\s+)?(?>[_A-Za-z]\w*\.)*\K[_A-Za-z]\w*" />
                     </functionName>
                 </function>
             </parser>
