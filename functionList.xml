@@ -53,7 +53,7 @@ http://notepad-plus-plus.org/features/function-list.html
                         Time:           $FG_ROOT/Nasal/local_weather.nas seems to take the longest for parsing.
                         Size:           $FG_ROOT/Nasal/bombable.nas seems to be the most largest file yet.
                 -->
-                <classRange mainExpr="^(?>[^\#\r\n]*?)(var\s+)?(?>[_A-Za-z]\w*\.)*?[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+                <classRange mainExpr="^(?>[^\#\r\n]*?)(var\s+)?(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
                     <className>
                         <nameExpr expr="(var\s+)?\K(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
                     </className>
