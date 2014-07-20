@@ -45,31 +45,36 @@ http://notepad-plus-plus.org/features/function-list.html
 
             <parser id="nasal_function" displayName="Nasal" commentExpr="(#.*?$)">
                 <!--
-                    Parser is based on syntax observed in parts of $FG_ROOT/Nasal/ and http://plausible.org/nasal/sample.nas
-                    Regex assumes that classes cannot be declared without curly braces.
-                    Anonymous functions not matched/listed yet.
+                    Parser based on syntax observed in http://plausible.org/nasal/sample.nas and in parts of $FG_ROOT/Nasal/
+                    Regex assumes that classes cannot be declared without curly braces
+                    Anonymous functions not matched/listed yet
 
-                    For testing purposes:
-                        Correctness:    $FG_ROOT/Nasal/canvas/MapStructure.nas seems to have the most convoluted code.
-                        Time:           $FG_ROOT/Nasal/local_weather.nas seems to take the longest for parsing.
-                        Size:           $FG_ROOT/Nasal/bombable.nas seems to be the largest file yet.
+                    For testing:
+                        Correctness:    $FG_ROOT/Nasal/canvas/MapStructure.nas seems to have the most convoluted code
+                        Time:           $FG_ROOT/Nasal/local_weather.nas takes the longest for parsing yet
+                        Size:           $FG_ROOT/Nasal/bombable.nas seems to be the largest file
                 -->
-                <classRange mainExpr="^(?>[^\#\r\n]*?)(var\s+)?(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*\s*=\s*\{[^\}]*?(\{(.|\s)*?\}\s*\,)*?[^\}]*?(var\s+)?(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*[:=]\s*func\b" openSymbole="\{" closeSymbole="\}" displayMode="node">
+                <classRange
+                    mainExpr="^(?>[^#\v]*?)(var\s+)?(?>[A-Z_a-z]\w*\.)*[A-Z_a-z]\w*\s*=\s*\{[^}]*?(\{(.|\v)*?\}\s*,)*?[^}]*?(var\s+)?(?>(?>[A-Z_a-z]\w*\.)*[A-Z_a-z]\w*)\s*[:=]\s*func\b"
+                    openSymbole="\{" closeSymbole="\}" displayMode="node">
                     <className>
-                        <nameExpr expr="(var\s+)?\K(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*" />
+                        <nameExpr expr="(var\s+)?\K(?>[A-Z_a-z]\w*\.)*[A-Z_a-z]\w*" />
                     </className>
-                    <function mainExpr="(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*[:=]\s*func\b">
+                    <function mainExpr="(?>(?>[A-Z_a-z]\w*\.)*[A-Z_a-z]\w*)\s*[:=]\s*func\b">
                         <functionName>
-                            <funcNameExpr expr="(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)" />
+                            <funcNameExpr expr="(?>(?>[A-Z_a-z]\w*\.)*[A-Z_a-z]\w*)" />
                         </functionName>
                     </function>
                 </classRange>
-                <function mainExpr="^[^\#\r\n]*?(var\s+)?(?>(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*)\s*=\s*func\b" displayMode="$className->$functionName">
+                <!-- ^(?>[^#\v]*?) breaks matching of code like MapStructure.nas:1013 -->
+                <function
+                    mainExpr="^[^#\r\n]*?(var\s+)?(?>(?>[A-Z_a-z]\w*\.)*[A-Z_a-z]\w*)\s*=\s*func\b"
+                    displayMode="$className->$functionName">
                     <className>
-                        <nameExpr expr="(?>[_A-Za-z]\w*\.)*[_A-Za-z]\w*(?=\.)" />
+                        <nameExpr expr="(?>[A-Z_a-z]\w*\.)*[A-Z_a-z]\w*(?=\.)" />
                     </className>
                     <functionName>
-                        <nameExpr expr="(var\s+)?(?>[_A-Za-z]\w*\.)*\K[_A-Za-z]\w*" />
+                        <nameExpr expr="(var\s+)?(?>[A-Z_a-z]\w*\.)*\K[A-Z_a-z]\w*" />
                     </functionName>
                 </function>
             </parser>
